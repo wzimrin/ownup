@@ -1,0 +1,9 @@
+Requirements:
+
+install npm
+intall dependencies using npm
+install parcel using npm (large, so you may want to do this globally)
+
+Commands:
+
+run dev server: npm run dev
