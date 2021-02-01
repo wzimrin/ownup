@@ -1,5 +1,16 @@
 import {apiKey} from './apiKey';
-import type {Quote, PropertyType, Occupancy} from './store';
+
+export type Quote = {
+    lenderName: string,
+    loanType: string,
+    interestRate: number,
+    closingCosts: number,
+    monthlyPayment: number,
+    apr: number,
+};
+
+export type PropertyType = "SingleFamily" | "Condo" | "Townhouse" | "MultiFamily";
+export type Occupancy = "Primary" | "Secondary" | "Investment";
 
 const baseUrl = "https://ss6b2ke2ca.execute-api.us-east-1.amazonaws.com/Prod/quotes"
 
