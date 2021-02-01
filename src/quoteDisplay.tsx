@@ -49,7 +49,6 @@ export function QuotesDisplay(): JSX.Element {
     } as const;
 
     const quotes = useSelector(selectQuotes);
-    console.log("quotesDisplay", quotes);
     if (quotes.length == 0) {
         return (
             <div style={style}> No Quotes </div>
@@ -58,7 +57,6 @@ export function QuotesDisplay(): JSX.Element {
     const rows = quotes.map((quote, idx) => {
         return <QuoteRow quote={quote} key={idx} />
     });
-    console.log(rows);
     return (
         <table style={style}>
             <QuotesHeader />

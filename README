@@ -17,3 +17,6 @@ I've never actually used redux before, so this may not be the most elegant way t
 
 The api key thing is awkward as hell, but it works.  The "proper" way to do things would
 involve making a server, and that seemed like overkill.
+
+The lack of testing is due to a mix of "I didn't have time to figure out how to test redux"
+and "there is very little code worth testing outside of react and redux".

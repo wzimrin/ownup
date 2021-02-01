@@ -76,7 +76,6 @@ export const fetchQuotes = (): ThunkAction<void, State, void, Action> => {
         }
         dispatch(updateError(null));
         const quotes = await getQuotes(loanSize, creditScore, state.propertyType, state.occupancy);
-        console.log("fetchQuotes", quotes);
         dispatch(updateQuotes(quotes));
     }
 }
