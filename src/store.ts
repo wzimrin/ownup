@@ -6,19 +6,19 @@ import {getQuotes, Quote, PropertyType, Occupancy} from './quotes';
 export type State = {
     loanSize: string,
     creditScore: string,
-    propertyType: PropertyType | null,
-    occupancy: Occupancy | null,
+    propertyType: PropertyType | "",
+    occupancy: Occupancy | "",
     quotes: Quote[],
-    error: string,
+    error: string | null,
 }
 
 const slice = createSlice({
     name: 'main',
     initialState: {
-        loanSize: "450000",
-        creditScore: "750",
-        propertyType: "SingleFamily",
-        occupancy: "Primary",
+        loanSize: "",
+        creditScore: "",
+        propertyType: "",
+        occupancy: "",
         quotes: [],
         error: "",
     } as State,
@@ -29,16 +29,16 @@ const slice = createSlice({
         updateCreditScore: (state: State, action: PayloadAction<string>) => {
             state.creditScore = action.payload;
         },
-        updatePropertyType: (state: State, action: PayloadAction<PropertyType | null>) => {
+        updatePropertyType: (state: State, action: PayloadAction<PropertyType | "">) => {
             state.propertyType = action.payload;
         },
-        updateOccupancy: (state: State, action: PayloadAction<Occupancy | null>) => {
+        updateOccupancy: (state: State, action: PayloadAction<Occupancy | "">) => {
             state.occupancy = action.payload;
         },
         updateQuotes: (state: State, action: PayloadAction<Quote[]>) => {
             state.quotes = action.payload;
         },
-        updateError: (state: State, action: PayloadAction<string>) => {
+        updateError: (state: State, action: PayloadAction<string | null>) => {
             state.error = action.payload;
         },
     }
@@ -57,13 +57,13 @@ export const fetchQuotes = (): ThunkAction<void, State, void, Action> => {
     return async (dispatch: ThunkDispatch<State, void, Action>, getState: () => State) => {
         const state = getState();
         const loanSize = Number(state.loanSize);
-        if (Number.isNaN(loanSize)) {
-            dispatch(updateError("Please enter a number for loan size"));
+        if (loanSize <= 0) {
+            dispatch(updateError("Please enter a positive number for loan size"));
             return;
         }
         const creditScore = Number(state.creditScore);
-        if (Number.isNaN(creditScore)) {
-            dispatch(updateError("Please enter a number for credit score"));
+        if (creditScore < 300 || creditScore > 800) {
+            dispatch(updateError("Please enter a number between 300 and 800 for credit score"));
             return;
         }
         if (!state.propertyType) {
@@ -74,6 +74,7 @@ export const fetchQuotes = (): ThunkAction<void, State, void, Action> => {
             dispatch(updateError("Please pick an occupancy type"));
             return;
         }
+        dispatch(updateError(null));
         const quotes = await getQuotes(loanSize, creditScore, state.propertyType, state.occupancy);
         dispatch(updateQuotes(quotes));
     }
@@ -85,4 +86,9 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch;
 
+export const selectLoanSize = (state: State) => state.loanSize;
+export const selectCreditScore = (state: State) => state.creditScore;
+export const selectPropertyType = (state: State) => state.propertyType;
+export const selectOccupancy = (state: State) => state.occupancy;
 export const selectQuotes = (state: State) => state.quotes;
+export const selectError = (state: State) => state.error;
