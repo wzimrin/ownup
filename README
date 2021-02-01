@@ -9,3 +9,11 @@ create apiKey.ts in src/ that defines apiKey (see src/apiKey.sample.ts)
 Commands:
 
 run dev server: npm run dev
+
+
+Comments:
+
+I've never actually used redux before, so this may not be the most elegant way to do things.
+
+The api key thing is awkward as hell, but it works.  The "proper" way to do things would
+involve making a server, and that seemed like overkill.
