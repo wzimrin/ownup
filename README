@@ -19,4 +19,5 @@ The api key thing is awkward as hell, but it works.  The "proper" way to do thin
 involve making a server, and that seemed like overkill.
 
 The lack of testing is due to a mix of "I didn't have time to figure out how to test redux"
-and "there is very little code worth testing outside of react and redux".
+and "there is very little logic worth testing here".  store.ts/fetchQuotes has some stuff to
+test, but for the rest, ts type checking will catch most errors.
