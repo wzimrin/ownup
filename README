@@ -3,6 +3,8 @@ Requirements:
 install npm
 intall dependencies using npm
 install parcel using npm (large, so you may want to do this globally)
+create apiKey.ts in src/ that defines apiKey (see src/apiKey.sample.ts)
+
 
 Commands:
 
